@@ -5,14 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 
+import { FormsModule } from '@angular/forms';
+import { CovertToSpacesPipe } from 'src/Shared/ConvertToSpaces.pipe';
+import { StarComponent } from 'src/Shared/star.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent
+    ProductsComponent,
+    CovertToSpacesPipe,
+    StarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
