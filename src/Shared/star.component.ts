@@ -11,7 +11,7 @@ import { Component, Input, EventEmitter, OnChanges, Output, SimpleChanges } from
 )
 export class StarComponent implements OnChanges{
     
-    @Input() rating:number = 4;
+    @Input() rating:number = 0;
     cropWidth:number = 75;
     @Output() ratingClicked: EventEmitter<string> =  new EventEmitter<string>();
     ngOnChanges(): void {

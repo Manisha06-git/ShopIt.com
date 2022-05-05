@@ -1,0 +1,37 @@
+[
+    {
+      "Id": 1,
+      "Name": "Leaf Rake",
+      "Price": 19.95,
+      "starRating": 3.2,
+      "imageUrl": "assets/Images/shampoo.jfif"
+    },
+    {
+      "Id": 2,
+      "Name": "Garden Cart",
+      "Price": 32.99,
+      "starRating": 4.2,
+      "imageUrl": "assets/Images/shampoo.jfif"
+    },
+    {
+      "Id": 5,
+      "Name": "Hammer",
+      "Price": 8.9,
+      "starRating": 4.8,
+      "imageUrl": "assets/Images/shampoo.jfif"
+    },
+    {
+      "Id": 8,
+      "Name": "Saw",
+      "Price": 11.55,
+      "starRating": 3.7,
+      "imageUrl": "assets/Images/shampoo.jfif"
+    },
+    {
+      "Id": 10,
+      "Name": "Video Game Controller",
+      "Price": 35.95,
+      "starRating": 4.6,
+      "imageUrl": "assets/Images/shampoo.jfif"
+    }
+  ]

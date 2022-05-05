@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Iproduct } from './products';
+import { ProductsService } from './products.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
+  providers:[ProductsService]
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   pageTitle:string = "Product List";
   imageWidth:number = 50;
   imageMargin:number = 2;
   imageHeight = 30;
   showImage:boolean = false;
-  private _listFilter:string = 'shampoo';
-
+  private _listFilter:string = '';
+  private _productService;
+  
   get listFilter():string{
     return this._listFilter;
   }
@@ -31,41 +35,30 @@ export class ProductsComponent implements OnInit {
     );
   }
   
-  products:Iproduct[] = [
-    {
-      "Id":1,
-      "Name":"Shampoo-dove",
-      "Price":500,
-      "starRating":3,
-      "imageUrl":"assets/Images/shampoo.jfif"
-    },
-    {
-      "Id":2,
-      "Name":"Shampoo-vatika",
-      "Price":500,
-      "starRating":5,
-      "imageUrl":"assets/Images/shampoo.jfif"
-    },
-    {
-      "Id":3,
-      "Name":"Shampoo-clinic plus",
-      "Price":100,
-      "starRating":5,
-      "imageUrl":"assets/Images/shampoo.jfif"
-    },
-    {
-      "Id":4,
-      "Name":"Shampoo-head&shoulders",
-      "Price":100,
-      "starRating":2,
-      "imageUrl":"assets/Images/shampoo.jfif"
-    }
-  ];
-  constructor() { }
-  filteredProducts:Iproduct[] = this.products;
+  products:Iproduct[] = [];
+  errorMessage = "";
+  sub!: Subscription;
+  constructor(private productsService:ProductsService) {
+    this._productService = productsService;
+   }
+  
+  filteredProducts:Iproduct[] = [];
   ngOnInit(): void {
-    console.log("application started");
-    this._listFilter = 'shampoo'
+     //this.products = this._productService.getProduct();
+
+    this.sub = this._productService.getProductViaUrlWithErrorHandled()
+    .subscribe({
+      next:products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error:err => this.errorMessage = err
+
+    });
+    
+  }
+  ngOnDestroy() {
+   this.sub.unsubscribe();
   }
   toggleImage():void{
     this.showImage = !this.showImage;
